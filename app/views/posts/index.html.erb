@@ -1,0 +1,77 @@
+<link rel="stylesheet" href="/css/board.css">
+<!--게시글 목록 시작-->
+<div style="width: 100%;">
+<a href="/posts/new" style="width: 100px; padding: 7px; margin: 0px auto 90px; display: block; text-align: center; font-size: 18px; border: 1px solid #dddddd;">새글 쓰기</a>
+</div>
+<%if !@posts.nil?%>
+<table class="table table-hover article_list">
+  <thead>
+    <tr style="font-size: 20px;">
+      <td class="th" style="text-align: left;">#</td>
+      <td class="th" style="font-weight: bolder;text-align: left;">제목</td>
+      <td class="th">날짜</td>
+    </tr>
+  </thead>
+  <tbody>
+    <%@posts.each do |article|%>
+    <tr class="<%if article.id == params[:id].to_i %>selected<%end%>">
+      <td scope="row"><%=article.id%></th>
+      <td><a href="/posts/show/<%=article.id%>"><%=article.title%></a></td>
+      <td><span class='hidden-xs'><%=article.created_at.strftime("%Y.")%></span><%=article.created_at.strftime("%m.%d")%></td>
+    </tr>
+    <%end%>
+  </tbody>
+</table>
+<%end%>
+<style media="screen">
+#title{
+  margin: 60px auto 30px auto;
+  text-align: center;
+  font-size: 50px;
+  font-weight: bold;
+}
+table thead{border-color: #000000;}
+table tr .th {
+  border: none;
+  border-bottom: 1px solid #000000 !important;
+  font-size: 25px;
+  text-align: center;
+}
+.article{margin:0 15px}
+.article_list tbody>tr>td a{
+  color:#000;
+  display:block;
+}
+.article_list thead>tr>th:nth-child(1),
+.article_list tbody>tr>th{
+  width: 5%;
+  text-align: center;
+}
+.article_list thead>tr>th:nth-child(3),
+.article_list tbody>tr>td:nth-child(3){
+  width: 80px;
+  text-align: center;
+}
+.article_list thead>tr>th:nth-child(4),
+.article_list tbody>tr>td:nth-child(4){
+  width: 70px;
+  text-align: center;
+}
+.article_list thead>tr>th:nth-child(5),
+.article_list tbody>tr>td:nth-child(5){
+  text-align: center;
+}
+@media screen and (min-width: 768px){
+  .article_list thead>tr>th:nth-child(3),
+  .article_list tbody>tr>td:nth-child(3){
+    width: 100px!important;
+  }
+  .article_list thead>tr>th:nth-child(4),
+  .article_list tbody>tr>td:nth-child(4){
+    width: 120px!important;
+  }
+  .hidden-xs{
+    display: inline-block!important;
+  }
+}
+</style>
